@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Prompt Vault</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="bg-glow glow-one"></div>
+  <div class="bg-glow glow-two"></div>
+
+  <main id="authScreen" class="auth-screen">
+    <section class="hero-card">
+      <div class="brand-row">
+        <div class="logo">✦</div>
+        <span>AI Prompt Vault</span>
+      </div>
+      <h1>Save your best AI prompts in one beautiful workspace.</h1>
+      <p>Organize prompts by category, tags, favorites and search them instantly. Built with Node.js, Express and MongoDB.</p>
+      <div class="feature-grid">
+        <div>🔐 JWT Login</div>
+        <div>⚡ Fast Search</div>
+        <div>⭐ Favorites</div>
+        <div>🧠 Prompt Library</div>
+      </div>
+    </section>
+
+    <section class="auth-card">
+      <div class="tabs">
+        <button class="tab active" id="loginTab">Login</button>
+        <button class="tab" id="registerTab">Register</button>
+      </div>
+
+      <form id="authForm">
+        <div id="nameGroup" class="form-group hidden">
+          <label>Name</label>
+          <input id="name" type="text" placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input id="email" type="email" placeholder="you@example.com" required />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input id="password" type="password" placeholder="Minimum 6 characters" required />
+        </div>
+        <button class="primary-btn" type="submit" id="authSubmit">Login</button>
+      </form>
+      <p class="hint">Demo tip: create an account once, then login anytime.</p>
+    </section>
+  </main>
+
+  <main id="appScreen" class="app-screen hidden">
+    <aside class="sidebar">
+      <div class="brand-row small">
+        <div class="logo">✦</div>
+        <span>Prompt Vault</span>
+      </div>
+      <button class="side-link active" data-filter="all">All Prompts</button>
+      <button class="side-link" data-filter="favorite">Favorites</button>
+      <button class="side-link" data-filter="Writing">Writing</button>
+      <button class="side-link" data-filter="Coding">Coding</button>
+      <button class="side-link" data-filter="Marketing">Marketing</button>
+      <button class="side-link" data-filter="Career">Career</button>
+      <button class="logout-btn" id="logoutBtn">Logout</button>
+    </aside>
+
+    <section class="dashboard">
+      <header class="topbar">
+        <div>
+          <p class="welcome" id="welcomeText">Welcome</p>
+          <h2>Your AI Prompt Library</h2>
+        </div>
+        <button class="primary-btn" id="newPromptBtn">+ New Prompt</button>
+      </header>
+
+      <div class="stats-grid">
+        <div class="stat"><span id="totalCount">0</span><p>Total Prompts</p></div>
+        <div class="stat"><span id="favoriteCount">0</span><p>Favorites</p></div>
+        <div class="stat"><span id="categoryCount">0</span><p>Categories</p></div>
+      </div>
+
+      <div class="search-row">
+        <input id="searchInput" type="search" placeholder="Search title, content, category or tags..." />
+        <button class="ghost-btn" id="clearSearchBtn">Clear</button>
+      </div>
+
+      <div id="promptGrid" class="prompt-grid"></div>
+      <div id="emptyState" class="empty-state hidden">
+        <h3>No prompts found</h3>
+        <p>Create your first prompt or change your search/filter.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modalTitle">Create Prompt</h3>
+        <button class="icon-btn" id="closeModalBtn">×</button>
+      </div>
+      <form id="promptForm">
+        <input type="hidden" id="promptId" />
+        <div class="form-group">
+          <label>Title</label>
+          <input id="promptTitle" type="text" placeholder="Example: LinkedIn Post Generator" required />
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select id="promptCategory">
+            <option>Writing</option>
+            <option>Coding</option>
+            <option>Marketing</option>
+            <option>Career</option>
+            <option>Learning</option>
+            <option>General</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tags</label>
+          <input id="promptTags" type="text" placeholder="resume, coding, blog" />
+        </div>
+        <div class="form-group">
+          <label>Prompt Content</label>
+          <textarea id="promptContent" rows="8" placeholder="Paste your prompt here..." required></textarea>
+        </div>
+        <button class="primary-btn full" type="submit">Save Prompt</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
